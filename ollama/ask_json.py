@@ -8,7 +8,7 @@ response = client.chat.completions.create(
     model="pilot",
     messages=[{"role": "user", "content": 'Reply in JSON with the keys "answer" and "confidence". What does git push do?'}],
     temperature=0,
-    max_tokens=12,
+    max_tokens=300,
     response_format={"type": "json_object"},
 )
 
