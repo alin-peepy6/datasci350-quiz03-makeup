@@ -1,0 +1,146 @@
+gh repo fork danilofreire/datasci350-quiz03-makeup --clone
+cd datasci350-quiz03-makeup
+touch commands.txt
+
+Activity 1
+1. 
+ollama show llama3.2:1b
+Model
+    architecture        llama          
+    parameters          1.2B           
+    context length      131072         
+    embedding length    2048           
+    quantization        Q8_0           
+    template source     go_template    
+
+  Capabilities
+    completion    
+    tools         
+
+  License
+    LLAMA 3.2 COMMUNITY LICENSE AGREEMENT                 
+    Llama 3.2 Version Release Date: September 25, 2024    
+    ...
+
+ollama ls
+NAME           ID              SIZE      MODIFIED          
+llama3.2:1b    baf6a787fdff    1.3 GB    About an hour ago 
+Predicted size = (1.2B * 8) / 8
+
+2. 
+touch ollama/Modelfile
+
+3.
+ollama create pilot -f ollama/Modelfile
+ollama run pilot
+>>> What does git push do?
+"Good morning, passengers, this is your captain speaking. Git push is a command that tells your local computer to 
+send your changes to a remote repository, like a cloud storage service. It's like sending a package to a friend, 
+but instead of physical mail, it's your code."
+/clear
+/bye
+
+ollama run pilot
+>>> How many passengers are on this flight today?
+Our flight today is carrying a total of 450 passengers. We're expecting a smooth journey, and our flight attendants 
+are ready to assist you with any needs you may have. Please take a look out the window and enjoy the view.
+
+The chatbot follows rules about calling the user "passengers" and keeping the sentence output to 3 maximum.
+
+4.
+git add ollama/ commands.txt
+git commit -m "Add pilot chatbot"
+git push
+
+Activity 2
+5.
+python3 ollama/ask_json.py
+{
+  "answer": "Git push is used to transfer
+length
+Traceback (most recent call last):
+  File "/mnt/c/Users/aliso/datasci350/datasci350-quiz03-makeup/ollama/ask_json.py", line 18, in <module>
+    print(json.loads(reply)["answer"])
+          ~~~~~~~~~~^^^^^^^
+  File "/usr/lib/python3.14/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/lib/python3.14/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 2 column 13 (char 14)
+
+finish_reason: "answer": "Git push is used to transfer length
+
+Changed max_tokens=12 -> max_tokens=300
+python3 ollama/ask_json.py
+{
+  "answer": "Git push is used to transfer changes from one repository to another, allowing you to collaborate with others and update your local copy of the codebase.",
+  "confidence": "90%" }
+stop
+Git push is used to transfer changes from one repository to another, allowing you to collaborate with others and update your local copy of the codebase.
+
+git add ollama/ commands.txt
+git commit -m "Add Python call"
+git push
+
+Activity 3
+6.
+47-48-187.us-east-2.compute.amazonaws.com
+Welcome to Ubuntu 26.04.1 LTS (GNU/Linux 7.0.0-1014-aws x86_64)
+
+ * Documentation:  https://docs.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu Nov 12 22:03:28 UTC 2026
+
+  System load:  0.08              Temperature:           -273.1 C
+  Usage of /:   30.4% of 6.61GB   Processes:             117
+  Memory usage: 26%               Users logged in:       0
+  Swap usage:   0%                IPv4 address for ens5: 172.31.11.212
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+7.
+sudo apt update
+sudo apt install python3-pandas python3-matplotlib python3-seaborn
+
+8.
+scp -i ~/datasci350-quiz3.pem aws/bike_analysis.py aws/bike_rentals.txt ubuntu@ec2-3-147-48-187.us-east-2.compute.amazonaws.com:~
+
+9.
+python3 bike_analysis.py > results.txt
+cat /var/lib/cloud/data/instance-id >> results.txt
+sha256sum results.txt > fingerprint.txt
+
+10.
+scp -i ~/datasci350-quiz3.pem ubuntu@ec2-3-147-48-187.us-east-2.compute.amazonaws.com:~/results.txt ubuntu@ec2-3-147-48-187.us-east-2.compute.amazonaws.com:~/fingerprint.txt ubuntu@ec2-3-147-48-187.us-east-2.compute.amazonaws.com:~/bike_analysis.png aws/
+When stopping a EC2 instance instead of terminating, you still pay for the disk space.
+Connection to ec2-3-147-48-187.us-east-2.compute.amazonaws.com closed.
+
+AI usage: Used AI to write out the pilot system block rules for activity 1.
+
+git add -A 
+git commit -m "Add AWS analysis results"
+git push

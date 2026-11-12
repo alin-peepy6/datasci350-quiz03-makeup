@@ -1,0 +1,11 @@
+Bike-Share Rental Analysis:
+===========================
+Total days analysed: 30
+Total rentals: 53621
+Average daily rentals: 1787
+Busiest day: 2025-09-28 with 2211 rentals
+Average rentals on dry days: 1859
+Average rentals on rainy days: 1680
+Average trip length: 17.4 minutes
+Analysis complete. Results saved to 'bike_analysis.png'
+i-0f8627b7043ba8d72
